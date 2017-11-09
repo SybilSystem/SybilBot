@@ -1,6 +1,6 @@
 {
   "name": "sybilbot",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A Node.JS bot for Discord.",
   "main": "bot.js",
   "scripts": {

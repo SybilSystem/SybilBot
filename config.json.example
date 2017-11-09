@@ -1,3 +1,4 @@
 {
-    "token":""
+    "token":"<insert token here>",
+    "defaultChannel":"<insert channel id here>"
 }
