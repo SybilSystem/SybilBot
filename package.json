@@ -1,0 +1,22 @@
+{
+  "name": "sybilbot",
+  "version": "0.0.1",
+  "description": "A Node.JS bot for Discord.",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SybilSystem/SybilBot.git"
+  },
+  "author": "SybilSystem",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SybilSystem/SybilBot/issues"
+  },
+  "homepage": "https://github.com/SybilSystem/SybilBot#readme",
+  "dependencies": {
+    "discord.js": "^11.2.1"
+  }
+}
