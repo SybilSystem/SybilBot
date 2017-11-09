@@ -1,6 +1,6 @@
 {
   "name": "sybilbot",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A Node.JS bot for Discord.",
   "main": "bot.js",
   "scripts": {
@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/SybilSystem/SybilBot#readme",
   "dependencies": {
-    "discord.js": "^11.2.1"
+    "discord.js": "^11.2.1",
+    "return-deep-diff": "^0.2.9"
   }
 }
