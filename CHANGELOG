@@ -5,7 +5,7 @@ v0.0.1:
     - Added 'ping' command to test bot functions
 
 v0.0.2:
-  date:
+  date: 2017-11-9
     added:
     - guildCreate
     - guildDelete
@@ -13,6 +13,19 @@ v0.0.2:
     - guildMemberDelete
     - 'foobar' test command
 
-    changes: 2017-11-9
+    changes:
     - Adjusted example config.json
     - Minor bugfixes
+
+v1.1.6:
+  date: 2017-11-10
+    added:
+    - purge
+    - setgame
+    - setstatus
+    - Role Events (Create, Delete, Update)
+    - Connection Events (Disconnect, Reconnect)
+    - Updated dependencies
+
+    changes:
+    - Bugfixes

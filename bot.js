@@ -2,9 +2,20 @@ const Discord = require('discord.js');
 const ddiff = require('return-deep-diff');
 const client = new Discord.Client();
 const config = require('./config.json');
+const chalk = require('chalk');
 
+
+//Connection Events
 client.on('ready',() => {
-  console.log("I'm online and ready to serve!");
+  console.log(chalk.bgGreen("I'm online and ready to serve!"));
+});
+
+client.on('disconnect', () => {
+  console.log(`You have been disconnected at ${new Date()}`);
+});
+
+client.on('reconnecting', () => {
+  console.log(`Reconnecting at ${new Date()}`);
 });
 
 //Guild Events
@@ -43,18 +54,41 @@ client.on('guildBanRemove', (Guild, User) => {
 });
 
 //Client Events
-client.on('channelCreate'. channel => {
+client.on('channelCreate', channel => {
   console.log(`A ${channel.type} channel called ${channel.name} was created at ${channel.createdAt} with the ID of ${channel.id}`);
 
 });
 
-client.on('channelDelete'. channel => {
+client.on('channelDelete', channel => {
   console.log(`The ${channel.type} channel, ${channel.name} was successfully deleted.`);
 
 });
 
 client.on('channelUpdate', (oChannel, nChannel) => {
   console.log(ddiff(oChannel, nChannel));
+});
+
+client.on('channelPinsUpdate', (channel, time) => {
+  console.log(`The pins for ${channel.name} have been updated at ${time}`);
+});
+
+client.on('messageDeleteBulk', messages => {
+  console.log(`${messages.size} was deleted`);
+});
+
+//Role Events
+client.on('roleCreate', role => {
+  let guild = role.guild;
+  guild.channels.get(config.defaultChannel).send(`A new role called ${role.name} has been created`)
+});
+
+client.on('roleDelete', role => {
+  let guild = role.guild;
+  guild.channels.get(config.defaultChannel).send(`A new role called ${role.name} has been deleted`)
+});
+
+client.on('roleUpdate', (oRole, nRole) => {
+  console.log(ddiff(oRole, nRole));
 });
 
 //Prefix
@@ -67,12 +101,50 @@ client.on('message', message => {
   var argresult = args.join(' ');
   if (message.author.bot) return;
 
-
   if (message.content.startsWith(prefix + 'ping')) {
     message.channel.send(`Pong! \`${Date.now() - message.createdTimestamp} ms\``);
-  }
+  } else
+
+  if (message.content.startsWith(prefix + 'purge')) {
+    let messagecount = parseInt(result);
+    message.channel.fetchMessages({limit: messagecount}).then(messages => message.channel.bulkDelete(messages));
+  } else
+
+  if (message.content.startsWith(prefix + 'setgame')) {
+   if (!result) {
+     result = null;
+   }
+   client.user.setGame(result);
+ } else
+
+ if (message.content.startsWith(prefix + 'setstatus')) {
+   if (!result) {
+     result = 'online';
+   }
+   client.user.setStatus(result);
+ } else
+
+ if (message.content.startsWith(prefix + 'foo')) {
+   message.channel.sendMessage('bar');
+ }
+
 });
 
+
+//Debugging and Error logging
+
+var regToken = /[\w\d]{24}\.[\w\d]{6}\.[\w\d-_]{27}/g; //Redacts token in debug logging.
+client.on('debug', e => {
+  console.log(chalk.bgBlue(e.replace(regToken, 'that was redacted')));
+ });
+
+client.on('error', e => {
+  console.log(chalk.bgRed(e.replace(regToken, 'that was redacted')));
+});
+
+client.on('warn', e => {
+  console.log(chalk.bgYellow(e.replace(regToken, 'that was redacted')));
+});
 
 //Discord Login
 client.login(config.token);
