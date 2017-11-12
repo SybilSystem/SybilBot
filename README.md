@@ -17,7 +17,7 @@ In a command prompt in the directory you choose the bot to live, run the followi
 
 Once finished:
 
-- In the folder from where you ran the git command <DON'T DO ANYTHING, IT'S NOT COMPLETE!>
+- In the folder from where you ran the git command, run `npm install`
 - Rename or copy `config.json.example` to `config.json`
 - Edit `config.json` and fill in all the relevant details as indicated in the file's comments.
 

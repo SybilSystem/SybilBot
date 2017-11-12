@@ -1,78 +1,43 @@
+if (process.version.slice(1).split(".")[0] < 8) throw new Error("Node 8.0.0 or higher is required. Update Node on your system.");
+
+//Dependencies
 const Discord = require('discord.js');
 const ddiff = require('return-deep-diff');
+const chalk = require('chalk');
 const client = new Discord.Client();
 const config = require('./config.json');
+require('./util/eventLoader.js')(client);
 
-client.on('ready',() => {
-  console.log("I'm online and ready to serve!");
+//Reload
+var reload = (message, cmd) => {
+	delete require.cache[require.resolve('./commands/' + cmd)];
+	try {
+		let cmdFile = require('./commands/' + cmd);
+	} catch (err) {
+		message.channel.send(`Problem loading ${cmd}: ${err}`).then(
+			response => response.delete(1000).catch(error => console.log(error.stack))
+		).catch(error => console.log(error.stack));
+	}
+	message.channel.send(`${cmd} reload was a success!`).then(
+		response => response.delete(1000).catch(error => console.log(error.stack))
+	).catch(error => console.log(error.stack));
+};
+exports.reload = reload;
+
+//Debugging and Error logging
+var regToken = /[\w\d]{24}\.[\w\d]{6}\.[\w\d-_]{27}/g; //Redacts token in debug logging.
+
+//client.on('debug', e => {
+// console.log(chalk.bgBlue.green(e.replace(regToken, 'that was redacted')));
+//});
+
+client.on('error', e => {
+  console.log(chalk.bgRed(e.replace(regToken, 'that was redacted')));
 });
 
-//Guild Events
-client.on('guildDelete', guild => {
-  console.log(`I have left ${guild.name} at ${new Date()}`);
+client.on('warn', e => {
+  console.log(chalk.bgYellow(e.replace(regToken, 'that was redacted')));
 });
-
-client.on('guildCreate', guild => {
-  guild.channels.get(config.defaultChannel).send(`I have joined \`${guild.name}\``);
-});
-
-client.on('guildMemberAdd', member => {
-  let guild = member.guild;
-  guild.channels.get(config.defaultChannel).send(`Please welcome ${member.user.username} to the server!`);
-});
-
-client.on('guildMemberRemove', member => {
-  let guild = member.guild;
-  guild.channels.get(config.defaultChannel).send(`Goodbye, ${member.user.username}!`);
-});
-
-client.on('guildMemberUpdate', (oMember, nMember) => {
-  console.log(ddiff(oMember, nMember));
-});
-
-client.on('guildUpdate', (oGuild, nGuild) => {
-  console.log(ddiff(oGuild, nGuild));
-});
-
-client.on('guildBanAdd', (Guild, User) => {
-  guild.channels.get(config.defaultChannel).send(`${user.username} has been banned!`);
-});
-
-client.on('guildBanRemove', (Guild, User) => {
-  guild.channels.get(config.defaultChannel).send(`${user.username} has been unbanned!`);
-});
-
-//Client Events
-client.on('channelCreate'. channel => {
-  console.log(`A ${channel.type} channel called ${channel.name} was created at ${channel.createdAt} with the ID of ${channel.id}`);
-
-});
-
-client.on('channelDelete'. channel => {
-  console.log(`The ${channel.type} channel, ${channel.name} was successfully deleted.`);
-
-});
-
-client.on('channelUpdate', (oChannel, nChannel) => {
-  console.log(ddiff(oChannel, nChannel));
-});
-
-//Prefix
-var prefix = "?"
-
-//Command Handler
-client.on('message', message => {
-  if (!message.content.startsWith(prefix)) return;
-  let args = message.content.split(' ').slice(1);
-  var argresult = args.join(' ');
-  if (message.author.bot) return;
-
-
-  if (message.content.startsWith(prefix + 'ping')) {
-    message.channel.send(`Pong! \`${Date.now() - message.createdTimestamp} ms\``);
-  }
-});
-
 
 //Discord Login
 client.login(config.token);
