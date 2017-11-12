@@ -29,3 +29,11 @@ v1.1.6:
 
     changes:
     - Bugfixes
+
+    v2.0.0:
+      date: 2017-11-11
+        changes:
+        - New command and event handlers
+        - Removed role commands
+        - Updated example config to include the prefix
+        - Changed logging features

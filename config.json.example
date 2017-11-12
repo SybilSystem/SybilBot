@@ -1,4 +1,5 @@
 {
     "token":"<insert token here>",
-    "defaultChannel":"<insert channel id here>"
+    "defaultChannel":"<insert channel id here>",
+    "prefix":"<prefix goes here>"
 }
