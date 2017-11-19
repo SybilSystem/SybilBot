@@ -50,8 +50,6 @@ client.reload = command => {
 };
 
 client.elevation = message => {
-  /* This function should resolve to an ELEVATION level which
-     is then sent to the command handler for verification*/
   let permlvl = 0;
   let mod_role = message.guild.roles.find('name', config.modrolename);
   if (mod_role && message.member.roles.has(mod_role.id)) permlvl = 2;
@@ -66,9 +64,9 @@ client.elevation = message => {
 //Debugging and Error logging
 var regToken = /[\w\d]{24}\.[\w\d]{6}\.[\w\d-_]{27}/g; //Redacts token in debug logging.
 
-//client.on('debug', e => {
-// console.log(chalk.bgBlue.green(e.replace(regToken, 'that was redacted')));
-//});
+client.on('debug', e => {
+ console.log(e.replace(regToken, 'that was redacted'));
+});
 
 client.on('error', e => {
   console.log(chalk.bgRed(e.replace(regToken, 'that was redacted')));
