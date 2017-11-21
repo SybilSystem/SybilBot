@@ -1,5 +1,8 @@
 # SybilBot
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/e5a623175e8d4f0d8c0f2d791f5af2fb)](https://www.codacy.com/app/SybilSystem/TinyBot?utm_source=github.com&utm_medium=referral&utm_content=SybilSystem/TinyBot&utm_campaign=badger)
+
+
 
 ## Requirements
 
