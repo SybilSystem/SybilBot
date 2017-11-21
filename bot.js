@@ -1,8 +1,7 @@
-if (process.version.slice(1).split(".")[0] < 8) throw new Error("Node 8.0.0 or higher is required. Update Node on your system.");
+if (process.version.slice(1).split('.')[0] < 8) throw new Error('Node 8.0.0 or higher is required. Update Node on your system.');
 
 //Dependencies
 const Discord = require('discord.js');
-const ddiff = require('return-deep-diff');
 const chalk = require('chalk');
 const fs = require('fs');
 const moment = require('moment');
