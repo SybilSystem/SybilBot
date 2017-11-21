@@ -1,6 +1,6 @@
 {
   "name": "tinybot",
-  "version": "2.2.1",
+  "version": "2.2.3",
   "description": "A Node.JS bot for Discord.",
   "main": "bot.js",
   "scripts": {

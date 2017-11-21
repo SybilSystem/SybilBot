@@ -50,10 +50,10 @@ client.reload = command => {
 
 client.elevation = message => {
   let permlvl = 0;
-  let mod_role = message.guild.roles.find('name', config.modrolename);
-  if (mod_role && message.member.roles.has(mod_role.id)) permlvl = 2;
-  let admin_role = message.guild.roles.find('name', config.adminrolename);
-  if (admin_role && message.member.roles.has(admin_role.id)) permlvl = 3;
+  let modRole = message.guild.roles.find('name', config.modrolename);
+  if (modRole && message.member.roles.has(modRole.id)) permlvl = 2;
+  let adminRole = message.guild.roles.find('name', config.adminrolename);
+  if (adminRole && message.member.roles.has(adminRole.id)) permlvl = 3;
   if (message.author.id === config.ownerid) permlvl = 4;
   return permlvl;
 };

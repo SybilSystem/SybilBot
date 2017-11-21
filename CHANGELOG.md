@@ -78,3 +78,13 @@ changes:
     - "Beautified" code
     - Replaced deprecated send commands
 ```
+
+## v2.2.3:
+
+```
+  date: 2017-11-21
+    changes:
+    - "Beautified" code
+    - Adjusted some of the functions by removing unnecessary syntax
+    - Minor bugfixes
+```
