@@ -6,7 +6,7 @@ exports.run = (client, message, args) => {
   let modlog = client.channels.find('name', 'mod-log');
   if (!modlog) return message.reply('I cannot find a mod-log channel');
   if (reason.length < 1) return message.reply('You must supply a reason for the unban.');
-  if (!user) return message.reply('You must supply a user id.').catch(console.error);
+  if (!user) return message.reply('You must supply a User Resolvable, such as a user id.').catch(console.error);
   message.guild.unban(user);
 };
 

@@ -1,5 +1,3 @@
-const config = require('../config.json')
-
 module.exports = (guild, user) => {
-  guild.channels.get(config.defaultChannel).send(`${user.username} has been banned!`);
+  guild.defaultChannel.send(`${user.tag} has been banned!`);
 };
