@@ -65,7 +65,7 @@ client.elevation = message => {
 var regToken = /[\w\d]{24}\.[\w\d]{6}\.[\w\d-_]{27}/g; //Redacts token in debug logging.
 
 client.on('debug', e => {
- console.log(e.replace(regToken, 'that was redacted'));
+  console.log(e.replace(regToken, 'that was redacted'));
 });
 
 client.on('error', e => {

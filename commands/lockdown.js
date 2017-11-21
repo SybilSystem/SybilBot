@@ -9,7 +9,7 @@ exports.run = (client, message, args) => {
     message.channel.overwritePermissions(message.guild.id, {
       SEND_MESSAGES: null
     }).then(() => {
-      message.channel.sendMessage('Lockdown lifted.');
+      message.channel.send('Lockdown lifted.');
       clearTimeout(client.lockit[message.channel.id]);
       delete client.lockit[message.channel.id];
     }).catch(error => {
@@ -19,12 +19,12 @@ exports.run = (client, message, args) => {
     message.channel.overwritePermissions(message.guild.id, {
       SEND_MESSAGES: false
     }).then(() => {
-      message.channel.sendMessage(`Channel locked down for ${ms(ms(time), { long:true })}`).then(() => {
+      message.channel.send(`Channel locked down for ${ms(ms(time), { long:true })}`).then(() => {
 
         client.lockit[message.channel.id] = setTimeout(() => {
           message.channel.overwritePermissions(message.guild.id, {
             SEND_MESSAGES: null
-          }).then(message.channel.sendMessage('Lockdown lifted.')).catch(console.error);
+          }).then(message.channel.send('Lockdown lifted.')).catch(console.error);
           delete client.lockit[message.channel.id];
         }, ms(time));
 
