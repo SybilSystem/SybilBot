@@ -1,10 +1,10 @@
 {
-  "name": "sybilbot",
-  "version": "2.1.0",
+  "name": "tinybot",
+  "version": "2.2.3",
   "description": "A Node.JS bot for Discord.",
   "main": "bot.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node bot.js"
   },
   "repository": {
     "type": "git",
@@ -20,11 +20,7 @@
     "chalk": "^2.3.0",
     "discord.js": "^11.2.1",
     "moment": "^2.19.2",
-    "return-deep-diff": "^0.2.9",
-    "sodium": "^2.0.1",
-    "uws": "^8.14.1"
-  },
-  "devDependencies": {
-    "eslint-config-google": "^0.9.1"
+    "ms": "^2.0.0",
+    "return-deep-diff": "^0.2.9"
   }
 }

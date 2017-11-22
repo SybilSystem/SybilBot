@@ -1,4 +1,4 @@
-const reqEvent = (event) => require(`../events/${event}`)
+const reqEvent = (event) => require(`../events/${event}`);
 module.exports = client => {
   client.on('ready', () => reqEvent('ready')(client));
   client.on('reconnecting', () => reqEvent('reconnecting')(client));
@@ -8,5 +8,5 @@ module.exports = client => {
   client.on('guildMemberRemove', reqEvent('guildMemberRemove'));
   client.on('guildMemberUpdate', reqEvent('guildMemberUpdate'));
   client.on('guildBanAdd', reqEvent('guildBanRemove'));
-  
+
 };

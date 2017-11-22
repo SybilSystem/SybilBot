@@ -1,8 +1,7 @@
-if (process.version.slice(1).split(".")[0] < 8) throw new Error("Node 8.0.0 or higher is required. Update Node on your system.");
+if (process.version.slice(1).split('.')[0] < 8) throw new Error('Node 8.0.0 or higher is required. Update Node on your system.');
 
 //Dependencies
 const Discord = require('discord.js');
-const ddiff = require('return-deep-diff');
 const chalk = require('chalk');
 const fs = require('fs');
 const moment = require('moment');
@@ -50,13 +49,11 @@ client.reload = command => {
 };
 
 client.elevation = message => {
-  /* This function should resolve to an ELEVATION level which
-     is then sent to the command handler for verification*/
   let permlvl = 0;
-  let mod_role = message.guild.roles.find('name', config.modrolename);
-  if (mod_role && message.member.roles.has(mod_role.id)) permlvl = 2;
-  let admin_role = message.guild.roles.find('name', config.adminrolename);
-  if (admin_role && message.member.roles.has(admin_role.id)) permlvl = 3;
+  let modRole = message.guild.roles.find('name', config.modrolename);
+  if (modRole && message.member.roles.has(modRole.id)) permlvl = 2;
+  let adminRole = message.guild.roles.find('name', config.adminrolename);
+  if (adminRole && message.member.roles.has(adminRole.id)) permlvl = 3;
   if (message.author.id === config.ownerid) permlvl = 4;
   return permlvl;
 };
@@ -66,9 +63,9 @@ client.elevation = message => {
 //Debugging and Error logging
 var regToken = /[\w\d]{24}\.[\w\d]{6}\.[\w\d-_]{27}/g; //Redacts token in debug logging.
 
-//client.on('debug', e => {
-// console.log(chalk.bgBlue.green(e.replace(regToken, 'that was redacted')));
-//});
+client.on('debug', e => {
+  console.log(e.replace(regToken, 'that was redacted'));
+});
 
 client.on('error', e => {
   console.log(chalk.bgRed(e.replace(regToken, 'that was redacted')));
