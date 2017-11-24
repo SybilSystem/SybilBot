@@ -1,6 +1,13 @@
+//===========================
+//Node.JS Version Check
+//===========================
+
 if (process.version.slice(1).split('.')[0] < 8) throw new Error('Node 8.0.0 or higher is required. Update Node on your system.');
 
+//===========================
 //Dependencies
+//===========================
+
 const Discord = require('discord.js');
 const chalk = require('chalk');
 const fs = require('fs');
@@ -13,6 +20,10 @@ const log = message => {
   console.log(`[${moment().format('YYYY-MM-DD HH:mm:ss')}] ${message}`);
 };
 
+//===========================
+//Command Handler
+//===========================
+
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 fs.readdir('./commands/', (err, files) => {
@@ -20,13 +31,17 @@ fs.readdir('./commands/', (err, files) => {
   log(`Loading a total of ${files.length} commands.`);
   files.forEach(f => {
     const props = require(`./commands/${f}`);
-    log(`Loading Command: ${props.help.name}. 👌`);
+    log(`Loading Command - ${props.help.name}: ✅`);
     client.commands.set(props.help.name, props);
     props.conf.aliases.forEach(alias => {
       client.aliases.set(alias, props.help.name);
     });
   });
 });
+
+//===========================
+//Reload Function
+//===========================
 
 client.reload = command => {
   return new Promise((resolve, reject) => {
@@ -48,6 +63,10 @@ client.reload = command => {
   });
 };
 
+//===========================
+//User Permissions
+//===========================
+
 client.elevation = message => {
   let permlvl = 0;
   const modRole = message.guild.roles.find('name', config.modrolename);
@@ -58,21 +77,25 @@ client.elevation = message => {
   return permlvl;
 };
 
-
-
+//===========================
 //Debugging and Error logging
+//===========================
+
 var regToken = /[\w\d]{24}\.[\w\d]{6}\.[\w\d-_]{27}/g; //Redacts token in debug logging.
 client.on('debug', e => {
-  console.log(e.replace(regToken, 'that was redacted'));
+  console.log(e.replace(regToken, (chalk.red('in config.json.'))));
 });
 
-client.on('warn', e => {
-  console.log(chalk.bgYellow(e.replace(regToken, 'that was redacted')));
+client.emit('warn',e => {
+  console.log(chalk.bgYellow(e));
 });
 
 client.on('error', e => {
-  console.log(chalk.bgRed(e.replace(regToken, 'that was redacted')));
+  console.log(chalk.bgRed(e));
 });
 
+//===========================
 //Discord Login
+//===========================
+
 client.login(config.token);
