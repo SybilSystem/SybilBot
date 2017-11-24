@@ -1,18 +1,21 @@
-const Discord = require('discord.js');
-exports.run = (client, message, args) => {
-  let reason = args.slice(1).join(' ');
-  let user = message.mentions.users.first();
-  let muteRole = client.guilds.get(message.guild.id).roles.find('name', 'Muted');
-  let modlog = client.channels.find('name', 'mod-log');
-  if (!modlog) return message.reply('I cannot find a mod-log channel.').catch(console.error);
+const {RichEmbed} = require('discord.js');
+const {caseNumber} = require('../util/caseNumber.js');
+const {parseUser} = require('../util/parseUser.js');
+const config = require('../config.json');
+exports.run = async (client, message, args) => {
+  const user = message.mentions.users.first();
+  parseUser(message, user);  const modlog = client.channels.find('name', 'mod-log');
+  const caseNum = await caseNumber(client, modlog);
+  const muteRole = client.guilds.get(message.guild.id).roles.find('name', 'Muted');
+  if (!modlog) return message.reply('I cannot find a mod-log channel');
   if (!muteRole) return message.reply('I cannot find a mute role.').catch(console.error);
-  if (reason.lenth < 1) return message.reply('A reason for the mute is required.').catch(console.error);
   if (message.mentions.users.size < 1) return message.reply('A user must be mentioned to mute them.').catch(console.error);
-
-  const embed = new Discord.RichEmbed()
+  const reason = args.splice(1, args.length).join(' ') || `Awaiting moderator's input. Use ${config.prefix}reason ${caseNum} <reason>.`;
+  const embed = new RichEmbed()
     .setColor(0xA8A8A8)
     .setTimestamp()
-    .setDescription(`**Action:** Un/Mute\n**Target:** ${user.tag} (${user.id}))\n**Moderator:** ${message.author.tag}\n**Reason:** ${reason}`);
+    .setDescription(`**Action:** Un/Mute\n**Target:** ${user.tag} (${user.id}))\n**Moderator:** ${message.author.tag}\n**Reason:** ${reason}`)
+    .setFooter(`Case ${caseNum}`);
 
   if (!message.guild.member(client.user).hasPermission('MANAGE_ROLES_OR_PERMISSIONS')) return message.reply('I do not have the correct permissions.').catch(console.error);
 

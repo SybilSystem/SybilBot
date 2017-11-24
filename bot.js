@@ -19,7 +19,7 @@ fs.readdir('./commands/', (err, files) => {
   if (err) console.error(err);
   log(`Loading a total of ${files.length} commands.`);
   files.forEach(f => {
-    let props = require(`./commands/${f}`);
+    const props = require(`./commands/${f}`);
     log(`Loading Command: ${props.help.name}. 👌`);
     client.commands.set(props.help.name, props);
     props.conf.aliases.forEach(alias => {
@@ -32,7 +32,7 @@ client.reload = command => {
   return new Promise((resolve, reject) => {
     try {
       delete require.cache[require.resolve(`./commands/${command}`)];
-      let cmd = require(`./commands/${command}`);
+      const cmd = require(`./commands/${command}`);
       client.commands.delete(command);
       client.aliases.forEach((cmd, alias) => {
         if (cmd === command) client.aliases.delete(alias);
@@ -50,9 +50,9 @@ client.reload = command => {
 
 client.elevation = message => {
   let permlvl = 0;
-  let modRole = message.guild.roles.find('name', config.modrolename);
+  const modRole = message.guild.roles.find('name', config.modrolename);
   if (modRole && message.member.roles.has(modRole.id)) permlvl = 2;
-  let adminRole = message.guild.roles.find('name', config.adminrolename);
+  const adminRole = message.guild.roles.find('name', config.adminrolename);
   if (adminRole && message.member.roles.has(adminRole.id)) permlvl = 3;
   if (message.author.id === config.ownerid) permlvl = 4;
   return permlvl;
@@ -62,17 +62,16 @@ client.elevation = message => {
 
 //Debugging and Error logging
 var regToken = /[\w\d]{24}\.[\w\d]{6}\.[\w\d-_]{27}/g; //Redacts token in debug logging.
-
 client.on('debug', e => {
   console.log(e.replace(regToken, 'that was redacted'));
 });
 
-client.on('error', e => {
-  console.log(chalk.bgRed(e.replace(regToken, 'that was redacted')));
-});
-
 client.on('warn', e => {
   console.log(chalk.bgYellow(e.replace(regToken, 'that was redacted')));
+});
+
+client.on('error', e => {
+  console.log(chalk.bgRed(e.replace(regToken, 'that was redacted')));
 });
 
 //Discord Login

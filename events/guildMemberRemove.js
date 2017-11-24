@@ -1,4 +1,4 @@
 module.exports = member => {
-  let guild = member.guild;
+  const guild = member.guild;
   guild.defaultChannel.send(`Goodbye, ${member.user.username}!`);
 };
