@@ -88,3 +88,13 @@ changes:
     - Adjusted some of the functions by removing unnecessary syntax
     - Minor bugfixes
 ```
+
+## v2.4.0:
+
+```
+  date: 2017-11-24
+    changes:
+    - Addressed issue [#4](https://github.com/SybilSystem/TinyBot/issues/4)
+    - Updated ready event to set game
+    - Improved command handler with async/await functions
+```

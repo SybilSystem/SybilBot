@@ -7,17 +7,17 @@ exports.run = (client, message, args) => {
     command = client.aliases.get(args[0]);
 
   if (!command)
-    return message.channel.send(`I cannot find the command: ${args[0]}`);
+    return message.channel.send(`🔍 I cannot find the command: ${args[0]} 🔍`);
 
   else {
-    message.channel.send(`Reloading: ${command}`)
+    message.channel.send(`⏳ Reloading: ${command} ⏳`)
       .then(m => {
         client.reload(command)
           .then(() => {
-            m.edit(`Successfully reloaded: ${command}`);
+            m.edit(`✅ Successfully reloaded: ${command} ✅`);
           })
           .catch(e => {
-            m.edit(`Command reload failed: ${command}\n\`\`\`${e.stack}\`\`\``);
+            m.edit(`🆘 Command reload failed: ${command} 🆘\n\`\`\`${e.stack}\`\`\``);
           });
       });
   }
