@@ -39,6 +39,6 @@ exports.conf = {
 
 exports.help = {
   name: 'reboot',
-  description: '',
+  description: 'Reboots the bot via PM2',
   usage: 'reboot'
 };
