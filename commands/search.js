@@ -1,6 +1,6 @@
 const config = require('../config.json');
 const ytapi = require('simple-youtube-api');
-const youtube = new ytapi(config.youtubeAPIkey);
+const youtube = new ytapi(config.youtubeAPIKey);
 
 exports.run = async (client, message, args) => {
   const search = args.join(' ');
