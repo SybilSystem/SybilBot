@@ -62,3 +62,6 @@ config.json
 
 #Deprecated Code
 deprecated/
+
+#VSCode
+.vscode
