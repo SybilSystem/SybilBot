@@ -28,9 +28,9 @@ exports.run = async (client, message, args, level) => {
   let id = (() => {
     const parsed = parse(song, true);
     if (/^(www\.)?youtube\.com/.test(parsed.hostname)) {
-      return parsed.query.v
+      return parsed.query.v;
     } else if (/^(www\.)?youtu.be/.test(parsed.hostname)) {
-      return parsed.pathname.slice(1)
+      return parsed.pathname.slice(1);
     }
   })();
 
