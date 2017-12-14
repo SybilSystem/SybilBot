@@ -41,26 +41,17 @@ exports.run = async (client, message, args, level) => {
 
   let info;
   try {
-    console.log(16);
     info = await youtube.getVideoByID(id);
   } catch (e) {
-    console.log(17);
     return message.channel.send(`\`An error occurred, ${e}\``);
   }
 
-  console.log(18);
-
   if (message.author.permLevel < 2 && parseInt(info.durationSeconds) > 900) return message.reply('Songs can be no longer than 15 minutes').catch(console.error);
-  console.log(19);
   const time = parseInt(info.durationSeconds, 10);
   const minutes = Math.floor(time / 60);
   let seconds = time % 60;
 
-  console.log(20);
-
   if (seconds < 10) seconds = '0' + seconds;
-
-  console.log(21);
 
   client.playlists.get(message.guild.id).queue.push({
     url: `https://www.youtube.com/watch?v=${info.id}`,
@@ -71,13 +62,9 @@ exports.run = async (client, message, args, level) => {
     playTimeSeconds: info.durationSeconds
   });
 
-  console.log(22);
-
   if (firstSong) {
-    console.log(23);
     playNext(message);
   } else {
-    console.log(24);
     embed
       .setTitle(`**${info.title}** (${minutes}:${seconds}) has been added to the queue.`)
       .setColor(0xDD2825)
@@ -86,14 +73,11 @@ exports.run = async (client, message, args, level) => {
       .setTimestamp()
       .setURL(`https://www.youtube.com/watch?v=${info.id}`);
     if (embedCheck(message)) {
-      console.log(25);
       message.channel.send(embed, { disableEveryone:true });
     } else {
-      console.log(26);
       message.channel.send(`**${info.title}** (${minutes}:${seconds}) has been added to the queue.`);
     }
   }
-  console.log(27);
 };
 
 exports.conf = {
