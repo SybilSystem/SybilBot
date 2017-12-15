@@ -1,8 +1,17 @@
-exports.run = (client, message) => {
-  const totalPlaylists = client.playlists.array().reduce((prev, curr, ) => prev + curr.playlist.length, 0);
-  const totalGuilds = client.playlists.array().filter(q => !!q.dispatcher).length;
+const { version } = require("discord.js");
+const moment = require("moment");
+require("moment-duration-format");
 
-  message.channel.send(`Currently queuing a total of ${totalPlaylists} songs on ${totalGuilds} servers for a total of ${totalPlaylists + totalGuilds} songs!`);
+exports.run = (client, message) => {
+  const duration = moment.duration(client.uptime).format(" D [days], H [hrs], m [mins], s [secs]");
+  message.channel.send(`= BOT STATISTICS =
+• Mem Usage  :: ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB
+• Uptime     :: ${duration}
+• Users      :: ${client.users.size.toLocaleString()}
+• Servers    :: ${client.guilds.size.toLocaleString()}
+• Channels   :: ${client.channels.size.toLocaleString()}
+• Discord.js :: v${version}
+• Node       :: ${process.version}`, {code: "asciidoc"});
 };
 
 exports.conf = {
@@ -12,6 +21,6 @@ exports.conf = {
 
 exports.help = {
   name: 'stats',
-  description: 'Displays technical data about current audio streams.',
+  description: 'Bot technical statistics.',
   usage: 'stats'
 };

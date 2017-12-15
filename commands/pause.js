@@ -3,7 +3,7 @@ exports.run = (client, message) => {
   if (!voiceChannel || (!message.member.voiceChannel && message.author.permLevel < 2)) {
     return message.reply('You must join a voice channel to pause the stream.');
   }
-  if (!client.playlists.get(message.guild.id).dispatcher.paused) return message.reply('Audio playback has not been paused.');
+  if (!client.playlists.get(message.guild.id).dispatcher.paused()) return message.reply('Audio playback has not been paused.');
   message.channel.send('Pausing playback.');
   client.playlists.get(message.guild.id).dispatcher.pause();
 };
