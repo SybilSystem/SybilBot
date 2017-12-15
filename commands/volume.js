@@ -8,7 +8,7 @@ exports.run = (client, message, args) => {
   if (!vol) return message.channel.sendMessage(`Current volume is set to ${client.playlists.get(message.guild.id).dispatcher.volume * 100}%.`);
   if (vol < 0 || vol > 100) return message.reply('Volume must be a value between 0% and 100%!');
 
-  message.channel.sendMessage(`Setting volume to ${vol}%!`).then(() => {
+  message.channel.send(`Setting volume to ${vol}%!`).then(() => {
     message.guild.voiceConnection.volume = vol / 100;
     client.playlists.get(message.guild.id).dispatcher.setVolume(vol / 100);
   });

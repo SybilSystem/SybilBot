@@ -98,3 +98,19 @@ changes:
     - Updated ready event to set game
     - Improved command handler with async/await functions
 ```
+
+## v3.0.1:
+
+```
+  date: 2017-12-17
+    added:
+    -Music functions! WOO!
+    -play
+    -pause
+    -resume
+    -stop
+
+    changes:
+    -Perms on reboot command
+    -Stats command
+```

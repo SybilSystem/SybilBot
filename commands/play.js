@@ -10,7 +10,7 @@ const youtube = new ytapi(config.youtubeAPIKey);
 exports.run = async (client, message, args, level) => {
   const song = args.join(' ');
   if (!song.length) return message.reply('You need to provide a search term or YouTube URL!');
-  const voiceChannel = message.member.voiceChannel;
+  const voiceChannel = message.member.voiceChannel ? message.member.voiceChannel : (message.guild.voiceConnection ? message.guild.voiceConnection.channel : null);
   if (!voiceChannel || (!message.member.voiceChannel && level < 2)) {
     return message.reply('Please join a voice channel first.');
   }
@@ -24,7 +24,6 @@ exports.run = async (client, message, args, level) => {
     });
     await voiceChannel.join();
   }
-
   let id = (() => {
     const parsed = parse(song, true);
     if (/^(www\.)?youtube\.com/.test(parsed.hostname)) {
