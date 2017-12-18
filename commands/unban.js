@@ -12,13 +12,14 @@ exports.run = (client, message, args) => {
 
 exports.conf = {
   enabled: true,
-  guildOnly: false,
+  guildOnly: true,
   aliases: [],
-  permLevel: 2
+  permLevel: 'Moderator'
 };
 
 exports.help = {
   name: 'unban',
+  category: 'Moderation',
   description: 'Unbans the user.',
   usage: 'unban [mention] [reason]'
 };

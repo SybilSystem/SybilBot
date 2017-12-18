@@ -1,9 +1,0 @@
-{
-    "ownerid": "YOURUSERID",
-    "modrolename": "YOURMODROLENAME",
-    "adminrolename": "YOURADMINROLENAME",
-    "token":"<insert token here>",
-    "youtubeAPIkey": "<insert API key here>",
-    "defaultChannel":"<insert channel id here>",
-    "prefix":"<prefix goes here>"
-}

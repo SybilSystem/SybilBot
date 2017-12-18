@@ -1,13 +1,14 @@
 const Discord = require('discord.js');
 const embed = new Discord.RichEmbed();
 const embedCheck = require('../functions/embedPerms.js');
-const config = require('../config.json');
 const playNext = require('../functions/playNext.js');
 const ytapi = require('simple-youtube-api');
 const { parse } = require('url');
-const youtube = new ytapi(config.youtubeAPIKey);
+
 
 exports.run = async (client, message, args, level) => {
+  const youtube = new ytapi(client.config.youtubeAPIKey);
+  
   const song = args.join(' ');
   if (!song.length) return message.reply('You need to provide a search term or YouTube URL!');
   const voiceChannel = message.member.voiceChannel ? message.member.voiceChannel : (message.guild.voiceConnection ? message.guild.voiceConnection.channel : null);
@@ -80,12 +81,15 @@ exports.run = async (client, message, args, level) => {
 };
 
 exports.conf = {
+  enabled: true,
+  guildOnly: true,
   aliases: [],
-  permLevel: 0
+  permLevel: 'User'
 };
 
 exports.help = {
   name: 'play',
+  category: 'Music',
   description: 'Used to start the queue',
   usage: 'play <song name or YouTube URL>'
 };

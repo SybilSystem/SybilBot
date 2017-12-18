@@ -34,11 +34,12 @@ exports.conf = {
   enabled: true,
   guildOnly: false,
   aliases: [],
-  permLevel: 4
+  permLevel: 'Bot Owner'
 };
 
 exports.help = {
   name: 'reboot',
+  category: 'System',
   description: 'Reboots the bot via PM2',
   usage: 'reboot'
 };

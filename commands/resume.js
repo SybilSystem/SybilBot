@@ -10,12 +10,14 @@ exports.run = (client, message) => {
 
 exports.conf = {
   enabled: true,
+  guildOnly: true,
   aliases: [],
   permLevel: 0
 };
 
 exports.help = {
   name: 'resume',
+  category: 'Music',
   description: 'Resumes the current audio stream',
   usage: 'resume'
 };

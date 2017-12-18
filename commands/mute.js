@@ -1,8 +1,9 @@
 const {RichEmbed} = require('discord.js');
 const {caseNumber} = require('../functions/caseNumber.js');
 const {parseUser} = require('../functions/parseUser.js');
-const config = require('../config.json');
 exports.run = async (client, message, args) => {
+  const settings = message.guild ? client.settings.get(message.guild.id) : client.config.defaultSettings;
+
   const user = message.mentions.users.first();
   parseUser(message, user);  const modlog = client.channels.find('name', 'mod-log');
   const caseNum = await caseNumber(client, modlog);
@@ -10,7 +11,7 @@ exports.run = async (client, message, args) => {
   if (!modlog) return message.reply('I cannot find a mod-log channel');
   if (!muteRole) return message.reply('I cannot find a mute role.').catch(console.error);
   if (message.mentions.users.size < 1) return message.reply('A user must be mentioned to mute them.').catch(console.error);
-  const reason = args.splice(1, args.length).join(' ') || `Awaiting moderator's input. Use ${config.prefix}reason ${caseNum} <reason>.`;
+  const reason = args.splice(1, args.length).join(' ') || `Awaiting moderator's input. Use ${settings.prefix}reason ${caseNum} <reason>.`;
   const embed = new RichEmbed()
     .setColor(0xA8A8A8)
     .setTimestamp()
@@ -36,13 +37,14 @@ exports.run = async (client, message, args) => {
 
 exports.conf = {
   enabled: true,
-  guildOnly: false,
+  guildOnly: true,
   aliases: ['unmute'],
-  permLevel: 2
+  permLevel: 'Moderator'
 };
 
 exports.help = {
   name: 'mute',
+  category: 'Moderation',
   description: 'Mutes or unmutes the mentioned user.',
   usage: '(un)mute <mention> <reason>'
 };
