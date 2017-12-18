@@ -43,8 +43,10 @@ exports.run = async (client,message, args = []) => {
 };
 
 exports.conf = {
+  enabled: true,
+  guildOnly: true,
   aliases: ['ev'],
-  permsLevel: 10
+  permsLevel: 'Bot Owner'
 };
 
 exports.help = {
