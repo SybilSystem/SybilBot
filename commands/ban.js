@@ -1,8 +1,8 @@
 const {RichEmbed} = require('discord.js');
-const {caseNumber} = require('../util/caseNumber.js');
-const {parseUser} = require('../util/parseUser.js');
-const config = require('../config.json');
+const {caseNumber} = require('../functions/caseNumber.js');
+const {parseUser} = require('../functions/parseUser.js');
 exports.run = async (client, message, args) => {
+  const settings = message.guild ? client.settings.get(message.guild.id) : client.config.defaultSettings;
   const user = message.mentions.users.first();
   parseUser(message, user);
   const modlog = client.channels.find('name', 'mod-log');
@@ -11,7 +11,7 @@ exports.run = async (client, message, args) => {
   if (message.mentions.users.size < 1) return message.reply('You must mention someone to ban them.').catch(console.error);
   //message.guild.ban(user, 2);
 
-  const reason = args.splice(1, args.length).join(' ') || `Awaiting moderator's input. Use ${config.prefix}reason ${caseNum} <reason>.`;
+  const reason = args.splice(1, args.length).join(' ') || `Awaiting moderator's input. Use ${settings.prefix}reason ${caseNum} <reason>.`;
   const embed = new RichEmbed()
     .setColor(0x00AE86)
     .setTimestamp()
@@ -22,13 +22,14 @@ exports.run = async (client, message, args) => {
 
 exports.conf = {
   enabled: true,
-  guildOnly: false,
+  guildOnly: true,
   aliases: [],
-  permLevel: 2
+  permLevel: 'Moderator'
 };
 
 exports.help = {
   name: 'ban',
+  category: 'Moderation',
   description: 'Bans the mentioned user.',
   usage: 'ban [mention] [reason]'
 };

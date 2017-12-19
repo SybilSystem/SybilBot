@@ -13,12 +13,14 @@ exports.run = (client, message) => {
 
 exports.conf = {
   enabled: true,
+  guildOnly: true,
   aliases: [],
-  permLevel: 2
+  permLevel: 'Moderator'
 };
 
 exports.help = {
   name: 'stop',
+  category: 'Music',
   description: 'Ends the current playlist.',
   usage: 'stop'
 };

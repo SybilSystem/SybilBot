@@ -10,12 +10,14 @@ exports.run = (client, message) => {
 
 exports.conf = {
   enabled: true,
+  guildOnly: true,
   aliases: ['p'],
-  permLevel: 0
+  permLevel: 'User'
 };
 
 exports.help = {
   name: 'pause',
+  category: 'Music',
   description: 'Pauses the current audio stream',
   usage: 'pause'
 };

@@ -17,12 +17,15 @@ exports.run = (client, message) => {
 };
 
 exports.conf = {
+  enabled: true,
+  guildOnly: true,
   aliases: ['info'],
-  permLevel: 0
+  permLevel: 'User'
 };
 
 exports.help = {
   name: 'stats',
+  category: 'System',
   description: 'Bot technical statistics.',
   usage: 'stats'
 };

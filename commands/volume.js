@@ -16,13 +16,14 @@ exports.run = (client, message, args) => {
 
 exports.conf = {
   enabled: true,
-  guildOnly: false,
+  guildOnly: true,
   aliases: ['v', 'vol'],
-  permLevel: 2
+  permLevel: 'User'
 };
 
 exports.help = {
   name: 'volume',
+  category: 'Music',
   description: 'Sets the volume of the audio stream in the channel.',
   usage: 'volume <value>'
 };

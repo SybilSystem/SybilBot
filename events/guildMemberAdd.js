@@ -1,6 +1,9 @@
-const config = require('../config.json');
+module.exports = (client, member) => {
+  const settings = client.settings.get(member.guild.id);
 
-module.exports = member => {
-  const guild = member.guild;
-  guild.channels.get(config.defaultChannel).send(`Please welcome ${member.user.username} to the server!`);
+  if (settings.welcomeEnabled !== 'true') return;
+
+  const welcomeMessage = settings.welcomeMessage.replace('{{user}}', member.user.tag);
+
+  member.guild.channels.find('name', settings.welcomeChannel).send(welcomeMessage).catch(console.error);
 };

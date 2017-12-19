@@ -7,13 +7,14 @@ exports.run = function(client, message, args) {
 
 exports.conf = {
   enabled: true,
-  guildOnly: false,
+  guildOnly: true,
   aliases: [],
-  permLevel: 2
+  permLevel: 'Moderator'
 };
 
 exports.help = {
   name: 'purge',
+  category: 'Moderation',
   description: 'Purges "X" amount of messages from a given channel.',
   usage: 'purge <number>'
 };

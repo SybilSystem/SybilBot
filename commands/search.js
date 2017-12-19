@@ -1,8 +1,8 @@
-const config = require('../config.json');
 const ytapi = require('simple-youtube-api');
-const youtube = new ytapi(config.youtubeAPIKey);
+
 
 exports.run = async (client, message, args) => {
+  const youtube = new ytapi(client.config.youtubeAPIKey);
   const search = args.join(' ');
   try {
     const results = await youtube.searchVideos(search, 5);
@@ -16,13 +16,14 @@ exports.run = async (client, message, args) => {
 
 exports.conf = {
   enabled: true,
-  guildOnly: false,
+  guildOnly: true,
   aliases: [],
-  permLevel: 2
+  permLevel: 'User'
 };
 
 exports.help = {
   name: 'search',
+  category: 'Music',
   description: 'Finds songs on YouTube.',
   usage: 'search <search term>'
 };
