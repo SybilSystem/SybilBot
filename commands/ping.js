@@ -7,13 +7,14 @@ exports.run = (client, message) => {
 
 exports.conf = {
   enabled: true,
-  guildOnly: false,
+  guildOnly: true,
   aliases: [],
-  permLevel: 0
+  permLevel: 'User'
 };
 
 exports.help = {
   name: 'ping',
-  description: 'Ping/Pong command. I wonder what this does? /sarcasm',
+  category: 'Misc.',
+  description: 'Shows the response time of the bot.',
   usage: 'ping'
 };

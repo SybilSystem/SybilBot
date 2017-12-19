@@ -1,7 +1,9 @@
-const config = require('../config.json');
 const chalk = require('chalk');
 
-module.exports = client => { //eslint-disable-line no-unused-vars
-  console.log(chalk.bgGreen.black('I\'m online and ready to serve!'));
-  client.user.setGame(`${config.prefix}help`);
+
+module.exports = async client => {
+  await client.wait(1000);
+  client.log('Ready', chalk.bgGreen.black(`${client.user.tag}, ready to serve ${client.users.size} users in ${client.guilds.size} servers.`, 'Ready!'));
+  client.user.setGame(`in ${client.guilds.size} servers`);
+  client.guilds.filter(g => !client.settings.has(g.id)).forEach(g => client.settings.set(g.id, client.config.defaultSettings));
 };

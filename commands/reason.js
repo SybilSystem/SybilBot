@@ -1,5 +1,3 @@
-const config = require('../config.json');
-
 async function embedSan(embed) {
   embed.message ? delete embed.message : null;
   embed.footer ? delete embed.footer.embed : null;
@@ -18,6 +16,8 @@ exports.run = async (client, message, args) => {
   const caseNumber = args.shift();
   const newReason = args.join(' ');
 
+  const settings = message.guild ? client.settings.get(message.guild.id) : client.config.defaultSettings;
+
   await modlog.fetchMessages({
     limit: 100
   }).then((messages) => {
@@ -31,7 +31,7 @@ exports.run = async (client, message, args) => {
     modlog.fetchMessage(caseLog.id).then(logMsg => {
       const embed = logMsg.embeds[0];
       embedSan(embed);
-      embed.description = embed.description.replace(`Awaiting moderator's input. Use ${config.prefix}reason ${caseNumber} <reason>.`, newReason);
+      embed.description = embed.description.replace(`Awaiting moderator's input. Use ${settings.prefix}reason ${caseNumber} <reason>.`, newReason);
       logMsg.edit({
         embed
       });
@@ -40,12 +40,15 @@ exports.run = async (client, message, args) => {
 };
 
 exports.conf = {
+  enabled: true,
+  guildOnly: true,
   aliases: [],
-  permLevel: 2
+  permLevel: 'Moderator'
 };
 
 exports.help = {
   name: 'reason',
+  category: 'Moderation',
   description: 'Updates an unset moderator action.',
   usage: 'reason <case number> <new reason>'
 };

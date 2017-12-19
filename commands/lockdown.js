@@ -1,3 +1,4 @@
+
 const ms = require('ms');
 exports.run = (client, message, args) => {
   if (!client.lockit) client.lockit = [];
@@ -38,11 +39,12 @@ exports.conf = {
   enabled: true,
   guildOnly: false,
   aliases: ['ld'],
-  permLevel: 2
+  permLevel: 'Moderator'
 };
 
 exports.help = {
   name: 'lockdown',
+  category: 'Moderation',
   description: 'This will lock a channel down for the set duration, be it in hours, minutes or seconds.',
   usage: 'lockdown <duration>'
 };

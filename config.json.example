@@ -1,8 +1,0 @@
-{
-    "ownerid": "YOURUSERID",
-    "modrolename": "YOURMODROLENAME",
-    "adminrolename": "YOURADMINROLENAME",
-    "token":"<insert token here>",
-    "defaultChannel":"<insert channel id here>",
-    "prefix":"<prefix goes here>"
-}
