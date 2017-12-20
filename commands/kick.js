@@ -1,5 +1,4 @@
 const {RichEmbed} = require('discord.js');
-const {caseNumber} = require('../functions/caseNumber.js');
 const {parseUser} = require('../functions/parseUser.js');
 exports.run = async (client, message, args) => {
   const settings = message.guild ? client.settings.get(message.guild.id) : client.config.defaultSettings;
@@ -7,7 +6,7 @@ exports.run = async (client, message, args) => {
   const user = message.mentions.users.first();
   parseUser(message, user);
   const modlog = client.channels.find('name', 'mod-log');
-  const caseNum = await caseNumber(client, modlog);
+  const caseNum = await client.caseNumber(client, modlog);
   if (!modlog) return message.reply('I cannot find a mod-log channel');
   if (message.mentions.users.size < 1) return message.reply('You must mention someone to kick them.').catch(console.error);
   //message.guild.member(user).kick();
