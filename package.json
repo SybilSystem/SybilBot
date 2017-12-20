@@ -1,6 +1,6 @@
 {
   "name": "tinybot",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "A Node.JS bot for Discord.",
   "main": "app.js",
   "scripts": {
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SybilSystem/SybilBot.git"
+    "url": "git+https://github.com/SybilSystem/TinyBot.git"
   },
   "author": "SybilSystem",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/SybilSystem/SybilBot/issues"
+    "url": "https://github.com/SybilSystem/TinyBot/issues"
   },
-  "homepage": "https://github.com/SybilSystem/SybilBot#readme",
+  "homepage": "https://github.com/SybilSystem/TinyBot#readme",
   "dependencies": {
     "chalk": "^2.3.0",
     "discord.js": "^11.2.1",
