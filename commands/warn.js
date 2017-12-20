@@ -10,6 +10,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
   if (!modlog) return message.reply('I cannot find a mod-log channel');
   if (message.mentions.users.size < 1) return message.reply('You must mention someone to warn them.').catch(console.error);
   const reason = args.splice(1, args.length).join(' ') || `Awaiting moderator's input. Use ${settings.prefix}reason ${caseNum} <reason>.`;
+
   const embed = new client.RichEmbed()
     .setColor(0x00AE86)
     .setTimestamp()

@@ -1,5 +1,6 @@
 const {RichEmbed} = require('discord.js');
 const {parseUser} = require('../functions/parseUser.js');
+
 exports.run = async (client, message, args) => {
   const settings = message.guild ? client.settings.get(message.guild.id) : client.config.defaultSettings;
 

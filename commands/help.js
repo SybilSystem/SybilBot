@@ -1,3 +1,4 @@
+
 exports.run = (client, message, args, level) => {
   if (!args[0]) {
     const settings = message.guild ? client.settings.get(message.guild.id) : client.config.defaultSettings;
