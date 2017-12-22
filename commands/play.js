@@ -8,7 +8,7 @@ const { parse } = require('url');
 
 exports.run = async (client, message, args, level) => {
   const youtube = new ytapi(client.config.youtubeAPIKey);
-  
+
   const song = args.join(' ');
   if (!song.length) return message.reply('You need to provide a search term or YouTube URL!');
   const voiceChannel = message.member.voiceChannel ? message.member.voiceChannel : (message.guild.voiceConnection ? message.guild.voiceConnection.channel : null);
@@ -73,7 +73,7 @@ exports.run = async (client, message, args, level) => {
       .setTimestamp()
       .setURL(`https://www.youtube.com/watch?v=${info.id}`);
     if (embedCheck(message)) {
-      message.channel.send(embed, { disableEveryone:true });
+      message.channel.send({embed});
     } else {
       message.channel.send(`**${info.title}** (${minutes}:${seconds}) has been added to the queue.`);
     }
