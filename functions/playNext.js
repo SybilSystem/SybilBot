@@ -13,6 +13,7 @@ const playNext = (message) => {
     const embed = new Discord.RichEmbed()
       .setTitle(`Now playing **${nextSong.songTitle}** (${nextSong.playTime})`)
       .setColor(0xDD2825)
+      .setFooter(`Requested by ${message.member.displayName}`, message.author.displayAvatarURL)
       .setImage(`https://i.ytimg.com/vi/${nextSong.id}/mqdefault.jpg`)
       .setTimestamp()
       .setURL(nextSong.url);
